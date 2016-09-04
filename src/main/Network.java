@@ -5,21 +5,71 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The Network class represents a single neural network, 
+ * which can be trained using SGD (stochastic gradient descent) 
+ * and asked to run on test data. 
+ * @author kevinshao
+ *
+ */
 public class Network {
 	
+	/**
+	 * The number of layers in the network, including the input and output layers. 
+	 * For example, a network with one hidden layer would have numLayers = 3
+	 */
 	private int numLayers;
+	
+	/**
+	 * An array representing the dimensions of the network. 
+	 * The first element in dimensions would represent the number of inputs, 
+	 * the last element would represent the number of outputs, 
+	 * and any numbers in between would represent the number of hidden neurons in each layer. 
+	 * Therefore, dimensions.length should equal numlayers. 
+	 */
 	private int [] dimensions;
+	
+	/**
+	 * A 2D array representing all the biases in the array. 
+	 * The bias of the ith neuron of the jth layer (assuming input layer is layer 0 and the first neuron is neuron 0) 
+	 * would be accessed by biases[j-1][i]
+	 */
 	private double [][] biases;
+	
+	/**
+	 * A 3D array representing all the weights in the array. 
+	 * Access is similar to that of the biases, where the kth weight of the ith neuron of the jth layer, all 0 indexed, 
+	 * would be accessed by weights[j-1][i][k];
+	 */
 	private double [][][] weights;
 	
+	/**
+	 * A double representing how quickly the network learns. 
+	 * Too big and you could overshoot the "optimal" parameters.
+	 * Too small and it could take too long. 
+	 */
 	private double learningRate = 3d;
+	
+	/**
+	 * The batch size used for stochastic gradient descent. 
+	 */
 	private int batchSize = 50;
 	
 	
+	/**
+	 * Initialize a network with given parameters. 
+	 * @param dimensions The dimensions of the network, where each element in the array gives the size of a layer. 
+	 */
 	public Network (int [] dimensions) {
 		this (dimensions, 3, 50);
 	}
 	
+	/**
+	 * 
+	 * @param dimensions
+	 * @param learningRate
+	 * @param batchSize
+	 */
 	public Network (int [] dimensions, double learningRate, int batchSize) {
 		this.learningRate = learningRate;
 		this.batchSize = batchSize;
