@@ -113,7 +113,7 @@ public class Wiki implements Loader, Tester, Writer {
 		StringBuilder string = new StringBuilder("In the early da");
 		int index = 15;
 		for (int i = 0; i < 10000; i++) {
-			List<Integer> characters = Calculator.stringToShiftedAscii(string.toString());
+			List<Integer> characters = stringToShiftedAscii(string.toString());
 			double [] input = getTrainingCase(characters, index);
 			int toAdd = net.run(input, true) + 32;
 			string.append((char)(toAdd));
@@ -142,6 +142,19 @@ public class Wiki implements Loader, Tester, Writer {
 			}
 		}
 		return "Input: " + str.toString() + " Output: " + c;
+	}
+	
+	
+	/**
+	 * Shift -32
+	 * @return
+	 */
+	public static List<Integer> stringToShiftedAscii (String input) {
+		List<Integer> result = new ArrayList<Integer>();
+		for (char c: input.toCharArray()) {
+			result.add(((int)c) - 32);
+		}
+		return result;
 	}
 
 }
