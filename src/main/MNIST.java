@@ -96,14 +96,11 @@ public class MNIST extends Type {
 	}
 
 	@Override
-	public void writeWeights(Network net) throws FileNotFoundException {
+	public void writeParams (Network net) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter("./Resources/mnist_weights.txt");
 		out.println(Arrays.deepToString(net.getBiases()));
 		out.close();
-	}
-	@Override
-	public void writeBiases(Network net) throws FileNotFoundException {
-		PrintWriter out = new PrintWriter("./Resources/mnist_biases.txt");
+		out = new PrintWriter("./Resources/mnist_biases.txt");
 		out.println(Arrays.deepToString(net.getWeights()));
 		out.close();
 	}

@@ -93,15 +93,11 @@ public class Wiki extends Type {
 	}
 
 	@Override
-	public void writeBiases(Network net) throws FileNotFoundException {
+	public void writeParams(Network net) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter("./Resources/wiki_biases.txt");
 		out.println(Arrays.deepToString(net.getBiases()));
 		out.close();
-
-	}
-	@Override
-	public void writeWeights(Network net) throws FileNotFoundException {
-		PrintWriter out = new PrintWriter("./Resources/wiki_weights.txt");
+		out = new PrintWriter("./Resources/wiki_weights.txt");
 		out.println(Arrays.deepToString(net.getWeights()));
 		out.close();
 
