@@ -16,7 +16,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class MNIST implements Loader, Writer, Tester {
+public class MNIST extends Case {
 	
 	public byte [] imageData = null;
 	public byte [] labelData = null;
