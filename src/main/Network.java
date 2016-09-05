@@ -149,7 +149,7 @@ public class Network {
 		return input;
 	}
 	
-	public void SGD (List<TrainingCase> training, int iterations, Tester tester) {
+	public void SGD (List<TrainingCase> training, int iterations, Type type) {
 		System.out.println("Starting SGD");
 		List<List<TrainingCase>> batches = getBatches(training);
 		for (int i = 0; i < iterations; i++) {
@@ -157,8 +157,8 @@ public class Network {
 				this.update(batch);
 			}
 //			System.out.println("Iteration " + i + " complete.");
-			if (tester != null) {
-				tester.test(this);
+			if (type != null) {
+				type.test(this);
 			}
 		}
 	}

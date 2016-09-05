@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Wiki implements Loader, Tester, Writer {
+public class Wiki extends Type {
 	
 	public List<Integer> pullWiki () throws NumberFormatException, IOException {
 		BufferedReader br = null;

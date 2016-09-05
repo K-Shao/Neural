@@ -16,7 +16,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class MNIST extends Case {
+public class MNIST extends Type {
 	
 	public byte [] imageData = null;
 	public byte [] labelData = null;
