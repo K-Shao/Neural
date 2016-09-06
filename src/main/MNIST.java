@@ -129,17 +129,6 @@ public class MNIST extends Type {
 			int guess = net.run(testSet.get(i), false);
 			if (testExpect.get(i) == guess) {
 				correct++;
-			} else {
-				try {
-					
-					java.nio.file.Files.copy(Paths.get(("./Resources/Images/" + (i+40000) + "-" + testExpect.get(i) + ".png")),
-											Paths.get("./Resources/MNIST/" + (i+40000) + "-" + testExpect.get(i) + "-" + guess + ".png"));
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				
 			}
 		}
 		
