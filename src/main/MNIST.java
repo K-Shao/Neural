@@ -158,14 +158,15 @@ public class MNIST extends Type {
 	}
 	
 	/**
-	 * Tests the network by using images 40000-50000 and recording how many right. 
+	 * Tests the network by using images random - random+10000 and recording how many right. 
 	 */
 	@Override
 	public void test (Network net) {
 		int total = 10000;
+		int start = (int)(Math.floor(Math.random() * 50000));
 		int correct = 0;
-		List<double []> testSet = this.pullImages(40000, total);
-		List<Integer> testExpect = this.pullLabels(40000, total);
+		List<double []> testSet = this.pullImages(start, total);
+		List<Integer> testExpect = this.pullLabels(start, total);
 		for (int i = 0; i < total; i++) {
 			int guess = net.run(testSet.get(i), false);
 			if (testExpect.get(i) == guess) {
