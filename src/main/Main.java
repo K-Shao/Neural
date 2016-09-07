@@ -50,7 +50,7 @@ public class Main {
 				net = new Network (new int[] {784, 50, 10}, Calculator.stringTo2DArray(mnist.pullBiases()), Calculator.stringTo3DArray(mnist.pullWeights()));
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Failed to load parameters. Make sure that ./Resources/mnist_biases.txt and ./Resources/mnist_weights.txt are both present and untampered. ");
+				System.out.println("Failed to load parameters. Make sure that ./Resources/mnist_biases.txt and ./Resources/mnist_weights.txt are both present and untampered. If this is your first time using the network, please train it using the train command. ");
 				loop();
 				return;
 			}
