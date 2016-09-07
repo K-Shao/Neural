@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * I used this class to load some text I'd gotten by crawling Wikipedia, and attempting 
+ * to train the network to produce something that resembles English. It did alright, but 
+ * I'm abandoning the idea (for now). 
+ * @author kevinshao
+ *
+ */
+@Deprecated
 public class Wiki extends Type {
 	
 	public List<Integer> pullWiki () throws NumberFormatException, IOException {
