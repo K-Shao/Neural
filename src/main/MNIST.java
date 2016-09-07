@@ -21,6 +21,12 @@ public class MNIST extends Type {
 	public byte [] imageData = null;
 	public byte [] labelData = null;
 	
+	/**
+	 * Initialize this case object, requires a labelFile and an imageFile, both which can be 
+	 * obtained through MNIST. The constructor loads each one's 
+	 * byte array into imageData and labelData, respectively. 
+	 * @throws IOException
+	 */
 	public MNIST () throws IOException {
 		Path labelPath = Paths.get("./Resources/labelFile");
 		labelData = Files.readAllBytes(labelPath);
@@ -28,6 +34,10 @@ public class MNIST extends Type {
 		imageData = Files.readAllBytes(imagePath);
 	}
 
+	/**
+	 * Converts the images stored in imageData into png images, then writes them out. 
+	 * @throws IOException
+	 */
 	@Deprecated
 	public void convertToImages() throws IOException {
 		int rowIncrement = 28;
@@ -48,19 +58,32 @@ public class MNIST extends Type {
 		}
 	}
 
+	/**
+	 * Returns all the images from start to start + number. 
+	 * @param start The index of the image to start from. 
+	 * @param number How many images to return. 
+	 * @return A List of double arrays, where each element in the list is a double array which 
+	 * represents the input data corresponding to an image. 
+	 */
 	public List<double[]> pullImages(int start, int number) {
 		List<double[]> toReturn = new ArrayList<double[]>();
-		int increment = 28 * 28;
+		int increment = 28 * 28; //Size of an image. 
 		for (int i = start; i < start+number; i++) {
 			double [] toAdd = new double [increment];
 			for (int j = 0; j < increment; j++) {
-				toAdd [j] = ((double) (imageData[(i*increment) + 16 + j] & 0xFF)) / 256;
+				toAdd [j] = ((double) (imageData[(i*increment) + 16 + j] & 0xFF)) / 256; 
 			}
 			toReturn.add(toAdd);
 		}
 		return toReturn;
 	}
 
+	/**
+	 * Returns all the labels from start to start + number. 
+	 * @param start The index of the label to start from. 
+	 * @param number How many labels to return. 
+	 * @return A List of integers, where each element in the list is the label for that image. 
+	 */
 	public List<Integer> pullLabels(int start, int number) {
 		List<Integer> toReturn = new ArrayList<Integer>();
 		for (int i = start; i < start+number; i++) {
@@ -69,6 +92,10 @@ public class MNIST extends Type {
 		return toReturn;
 	}
 
+	/**
+	 * Simply reads the biases from mnist_biases.txt. 
+	 */
+	@Override
 	public String pullBiases() {
 		String line = null;
 		BufferedReader br = null;
@@ -82,6 +109,10 @@ public class MNIST extends Type {
 		return line;
 	}
 
+	/**
+	 * Simply reads the weights from mnist_weights.txt. 
+	 */
+	@Override
 	public String pullWeights() {
 		String line = null;
 		BufferedReader br = null;
@@ -95,6 +126,10 @@ public class MNIST extends Type {
 		return line;
 	}
 
+	/**
+	 * Writes out biases and weights of the given networks 
+	 * to mnist_biases.txt and mnist_weights.txt, respectively. 
+	 */
 	@Override
 	public void writeParams (Network net) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter("./Resources/mnist_weights.txt");
@@ -105,11 +140,14 @@ public class MNIST extends Type {
 		out.close();
 	}
 
+	/**
+	 * Returns a training set of the first 20000 images in the MNIST set. 
+	 */
 	@Override
 	public List<TrainingCase> getTrainingCases() {
 		List<TrainingCase> training = new ArrayList<TrainingCase> ();
-		List<double []> trainingSet = this.pullImages(0, 10000);
-		List<Integer> expected = this.pullLabels(0, 10000);
+		List<double []> trainingSet = this.pullImages(0, 20000);
+		List<Integer> expected = this.pullLabels(0, 20000);
 		for (int i = 0; i < trainingSet.size(); i++) {
 			TrainingCase tc = new TrainingCase(
 										trainingSet.get(i), 
@@ -119,6 +157,9 @@ public class MNIST extends Type {
 		return training;
 	}
 	
+	/**
+	 * Tests the network by using images 40000-50000 and recording how many right. 
+	 */
 	@Override
 	public void test (Network net) {
 		int total = 10000;
