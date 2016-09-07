@@ -190,7 +190,7 @@ public class Network {
 	 * @param type Optional argument to test after each iteration. 
 	 */
 	public void SGD (List<TrainingCase> training, int iterations, Type type) {
-		System.out.println("Starting SGD");
+		System.out.println("Starting SGD. Iterations to perfrom: " + iterations + ".");
 		List<List<TrainingCase>> batches = getBatches(training);
 		for (int i = 0; i < iterations; i++) {
 			for (List<TrainingCase> batch: batches) {
@@ -199,6 +199,7 @@ public class Network {
 			if (type != null) {
 				type.test(this);
 			}
+			System.out.println("Iteration " + (i+1) + " complete. ");
 		}
 	}
 	
